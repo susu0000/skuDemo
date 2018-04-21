@@ -34,6 +34,7 @@
     
     
     // 布局
+    __weak typeof(self) weak = self;
     [[YSSkuTool shareInstance].data4 enumerateObjectsUsingBlock:^(NSArray * _Nonnull obj, NSUInteger idx1, BOOL * _Nonnull stop) {
        
         UILabel *titleLbl = [UILabel new];
@@ -44,21 +45,23 @@
         [obj enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx2, BOOL * _Nonnull stop) {
            
             UIButton *btn = [UIButton new];
+            btn.tag = 1;
             [btn setTitle:obj forState:UIControlStateNormal];
             [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             btn.frame = CGRectMake(110 * idx2 + 10, 130 + idx1 * 100, 100, 30);
             [self.view addSubview:btn];
             [btn addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
-            [_btns[idx1] addObject:btn];
+            [weak.btns[idx1] addObject:btn];
+            
         }];
         
     }];
     
     [YSSkuTool shareInstance].callback = ^(NSInteger row, NSInteger column, YSSkuStatus status) {
       
-        UIButton *btn = _btns[row][column];
+        UIButton *btn = weak.btns[row][column];
         
-        btn.selected = status == YSSkuStatusSelect;
+        btn.tag = status;
         id color = @[[UIColor redColor], [UIColor blackColor], [UIColor lightGrayColor]][status];
         [btn setTitleColor:color forState:UIControlStateNormal];
         
@@ -80,8 +83,7 @@
         }];
     }];
     
-    
-    [[YSSkuTool shareInstance] inputWithRow:index1 column:index2 isSelect:!sender.selected];
+    [[YSSkuTool shareInstance] inputWithRow:index1 column:index2 status:sender.tag];
     
 }
 

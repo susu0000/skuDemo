@@ -28,7 +28,7 @@ typedef NS_ENUM(NSInteger, YSSkuStatus) {
 - (void)setOriginalData:(id)data;
 
 // 输入
-- (void)inputWithRow:(NSInteger)row column:(NSInteger)column isSelect:(BOOL)isSelect;
+- (void)inputWithRow:(NSInteger)row column:(NSInteger)column status:(YSSkuStatus)status;
 
 // 输出
 @property (nonatomic, copy) void(^callback)(NSInteger row, NSInteger column, YSSkuStatus status);

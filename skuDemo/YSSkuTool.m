@@ -140,13 +140,24 @@ static id _instance;
 }
 
 
-- (void)inputWithRow:(NSInteger)row column:(NSInteger)column isSelect:(BOOL)isSelect{
-    
-    if (isSelect) {
-        _data7[row] = _data5[row][column];
-    }else{
-        _data7[row] = @1;
+- (void)inputWithRow:(NSInteger)row column:(NSInteger)column status:(YSSkuStatus)status{
+
+    switch (status) {
+        case 0:
+            _data7[row] = @1;
+            break;
+        case 1:
+            _data7[row] = _data5[row][column];
+            break;
+        case 2:
+            _data7 = [self getData7];
+            _data7[row] = _data5[row][column];
+            break;
+        default:
+            break;
     }
+
+    
     
     // 刷新
     __weak typeof(self) weak = self;
