@@ -1,5 +1,7 @@
 # skuDemo
 
+[简书地址](https://www.jianshu.com/p/2bce117a0e99)
+
 ## 0 业务场景
 
 ![image](http://upload-images.jianshu.io/upload_images/1963623-b74c8c6e2f17db07?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
